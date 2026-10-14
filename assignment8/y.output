@@ -1,0 +1,60 @@
+   0  $accept : ED $end
+
+   1  ED : E
+
+   2  E : NUM plus NUM
+
+state 0
+	$accept : . ED $end  (0)
+
+	NUM  shift 1
+	.  error
+
+	ED  goto 2
+	E  goto 3
+
+
+state 1
+	E : NUM . plus NUM  (2)
+
+	plus  shift 4
+	.  error
+
+
+state 2
+	$accept : ED . $end  (0)
+
+	$end  accept
+
+
+state 3
+	ED : E .  (1)
+
+	.  reduce 1
+
+
+state 4
+	E : NUM plus . NUM  (2)
+
+	NUM  shift 5
+	.  error
+
+
+state 5
+	E : NUM plus NUM .  (2)
+
+	.  reduce 2
+
+
+4 terminals, 3 nonterminals
+3 grammar rules, 6 states
+
+grammar parser grammar
+symbol# value# symbol
+     0      0  $end
+     1    256  error
+     2    257  NUM
+     3    258  plus
+     4    259  $accept
+     5    260  ED
+     6    261  E
