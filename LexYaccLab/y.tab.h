@@ -41,23 +41,19 @@
    enum yytokentype {
      IF = 258,
      THEN = 259,
-     OP = 260,
-     CP = 261,
+     ID = 260,
+     NUM = 261,
      ROP = 262,
-     AOP = 263,
-     NUM = 264,
-     ID = 265
+     OP = 263
    };
 #endif
 /* Tokens.  */
 #define IF 258
 #define THEN 259
-#define OP 260
-#define CP 261
+#define ID 260
+#define NUM 261
 #define ROP 262
-#define AOP 263
-#define NUM 264
-#define ID 265
+#define OP 263
 
 
 

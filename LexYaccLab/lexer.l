@@ -4,17 +4,18 @@
 %}
 
 %%
-"if"                        { return IF; }
-"then"                      { return THEN; }
-"("                         { return OP; }
-")"                         { return CP; }
-"<="|">="|"=="|"!="|"<"|">" { return ROP; }
-"="                         { return AOP; }
-[0-9]+                      { return NUM; }
-[a-zA-Z_][a-zA-Z0-9_]*      { return ID; }
-[ \t]                       ;
-\n                          { return 0; }
-.                           { return yytext[0]; }
+"if"                     { return IF; }
+"then"                   { return THEN; }
+[a-zA-Z][a-zA-Z0-9]*     { return ID; }
+[0-9]+                   { return NUM; }
+"<"                      { return ROP; }
+"="                      { return OP; }
+"("                      { return '('; }
+")"                      { return ')'; }
+[ \t\n]+                 ;
 %%
 
-int yywrap() { return 1; }
+int yywrap()
+{
+    return 1;
+}

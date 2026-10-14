@@ -1,38 +1,34 @@
 
 %{
 #include <stdio.h>
-int yylex(void);
-void yyerror(const char *s);
+int yylex();
+void yyerror(char *s);
 %}
 
-%token IF THEN OP CP ROP AOP NUM ID
+%token IF THEN ID NUM ROP OP
 
 %%
+stmt : IF '(' condition ')' THEN ID OP NUM
+       {
+           printf("Valid statement\n");
+       }
+     ;
 
-stmt:
-    IF OP expr ROP expr CP THEN ID AOP expr
-    ;
-
-expr:
-    ID
-    | NUM
-    ;
-
+condition : ID ROP ID
+          | ID ROP NUM
+          | NUM ROP ID
+          | NUM ROP NUM
+          ;
 %%
 
-void yyerror(const char *s)
+void yyerror(char *s)
 {
-    printf("Syntax error: %s\n", s);
+    printf("Invalid statement\n");
 }
 
-int main(void)
+int main()
 {
     printf("Enter an if statement:\n");
-
-    if (yyparse() == 0)
-        printf("Success: Valid statement\n");
-    else
-        printf("Failure: Invalid statement\n");
-
+    yyparse();
     return 0;
 }
